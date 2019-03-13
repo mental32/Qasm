@@ -5,6 +5,10 @@
 
 Felt inspired, wanted to try making one!
 
+##### No, I meant why is it "The polite assembler"
+
+Qasm aims to generate warnings helpful warnings and errors, kinda like Rust's, making it friendlier and more polite than other assemblers.
+
 ## Requirements
 
 ### Compiling
@@ -27,11 +31,11 @@ L0: db "Hello world", 10
 section .text
 
 _start:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, L0
-	mov rdx, 14
-	syscall
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, L0
+    mov rdx, 14
+    syscall
 
     mov rax, 60
     mov rdi, 0
