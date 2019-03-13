@@ -1,0 +1,21 @@
+WHITESPACE = _{ " " }
+
+inst = { ASCII_ALPHA+ ~ (arg ~ ("," ~ arg)*)? }
+arg = { reg | disp | imm }
+
+imm = { "-"? ~ ASCII_DIGIT+ }
+
+disp = { (("byte" | "word" | "dword" | "qword") ~ "ptr")? ~ "[" ~ expr ~ "]" }
+expr = { primary | primary ~ op ~ expr }
+primary = { reg | imm }
+op = { "+" | "-" | "*" }
+
+reg = { gp | mm }
+mm = { ("x" | "y" | "z") ~ "mm" ~ ASCII_DIGIT+ }
+seg = { "ds" | "ss" | "cs" }
+word = { ("a" | "b" | "c" | "d") ~ ("h" | "l") }
+gp = { (("r" | "e") ~ ("ax" | "bx" | "cx" | "dx" | "si" | "di" )) | seg | word }
+
+source = { (inst | inst) }
+
+file = { SOI ~ ((source)? ~ NEWLINE)* ~ EOI }
